@@ -786,7 +786,7 @@ body {
 
 .pet-detail-img {
   max-height: 400px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 12px;
 }
 

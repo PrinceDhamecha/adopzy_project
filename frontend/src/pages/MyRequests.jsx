@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api';
+import api, { getImageUrl } from '../services/api';
 
 export default function MyRequests() {
   const [requests, setRequests] = useState([]);
@@ -42,7 +42,7 @@ export default function MyRequests() {
       ) : (
         <div className="row g-4">
           {requests.map((req) => {
-            const imgSrc = req.pet_image ? (req.pet_image.startsWith('http') ? req.pet_image : `/uploads/${req.pet_image}`) : 'https://via.placeholder.com/100';
+            const imgSrc = getImageUrl(req.pet_image);
             return (
               <div key={req.id} className="col-md-6">
                 <div className="card shadow-sm">

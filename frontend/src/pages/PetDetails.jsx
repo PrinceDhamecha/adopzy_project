@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import api from '../services/api';
+import api, { getImageUrl } from '../services/api';
 
 export default function PetDetails({ user }) {
   const { id } = useParams();
@@ -46,7 +46,7 @@ export default function PetDetails({ user }) {
 
   if (!pet) return null;
 
-  const imageUrl = pet.image ? (pet.image.startsWith('http') ? pet.image : `/uploads/${pet.image}`) : 'https://via.placeholder.com/600x400?text=No+Image';
+  const imageUrl = getImageUrl(pet.image);
   const isOwner = user?.id === pet.provider_id;
 
   return (

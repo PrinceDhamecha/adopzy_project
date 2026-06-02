@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../services/api';
+import api, { getImageUrl } from '../services/api';
 
 export default function MyPets() {
   const [pets, setPets] = useState([]);
@@ -65,7 +65,7 @@ export default function MyPets() {
             </thead>
             <tbody>
               {pets.map((pet) => {
-                const imgSrc = pet.image ? (pet.image.startsWith('http') ? pet.image : `/uploads/${pet.image}`) : 'https://via.placeholder.com/50';
+                const imgSrc = getImageUrl(pet.image);
                 return (
                   <tr key={pet.id}>
                     <td>

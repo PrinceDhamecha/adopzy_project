@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import { getImageUrl } from '../services/api';
 
 export default function PetCard({ pet }) {
-  const imageUrl = pet.image ? (pet.image.startsWith('http') ? pet.image : `/uploads/${pet.image}`) : 'https://via.placeholder.com/300x200?text=No+Image';
+  const imageUrl = getImageUrl(pet.image);
 
   return (
     <div className="col-md-6 col-lg-4 mb-4">

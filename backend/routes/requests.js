@@ -36,7 +36,7 @@ router.post('/', adopterAuth, async (req, res) => {
     }
 
     const [existing] = await db.query(
-      'SELECT * FROM adoption_requests WHERE pet_id = ? AND adopter_id = ? AND status = "pending"',
+      "SELECT * FROM adoption_requests WHERE pet_id = ? AND adopter_id = ? AND status = 'pending'",
       [pet_id, req.user.id]
     );
     if (existing.length > 0) {
@@ -125,7 +125,7 @@ router.put('/:id', providerAuth, async (req, res) => {
     );
 
     if (status === 'approved') {
-      await db.query('UPDATE pets SET status = "adopted" WHERE id = ?', [requests[0].pet_id]);
+      await db.query("UPDATE pets SET status = 'adopted' WHERE id = ?", [requests[0].pet_id]);
     }
 
     const [updated] = await db.query(

@@ -73,7 +73,7 @@ router.post('/', providerAuth, upload.single('image'), async (req, res) => {
       return res.status(400).json({ message: 'Name and species are required' });
     }
 
-    const image = req.file ? req.file.filename : null;
+    const image = req.file ? (req.file.path ? req.file.path : req.file.filename) : null;
 
     const [result] = await db.query(
       `INSERT INTO pets (provider_id, name, species, breed, age, gender, location, description, image)
@@ -101,7 +101,7 @@ router.put('/:id', providerAuth, upload.single('image'), async (req, res) => {
 
     const pet = pets[0];
     const { name, species, breed, age, gender, location, description } = req.body;
-    const image = req.file ? req.file.filename : pet.image;
+    const image = req.file ? (req.file.path ? req.file.path : req.file.filename) : pet.image;
 
     await db.query(
       `UPDATE pets SET name=?, species=?, breed=?, age=?, gender=?, location=?, description=?, image=?
